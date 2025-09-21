@@ -14,8 +14,13 @@ mun = mun |>
 mun = mun |> 
   dplyr::select(CVEGEO, NOM_MUN, Area, PERIMETER, img_direccion, geometry)
 
+
+
+source("Funcion_Github.R")
+git = imagenes_git()
+
 mun = mun |> 
-  dplyr::left_join(y = git, by = c("NOM_MUN" = "municipios"))
+  dplyr::left_join(y = git, by = c("NOM_MUN" = "nombre_principal"))
 
 library(leaflet)
 

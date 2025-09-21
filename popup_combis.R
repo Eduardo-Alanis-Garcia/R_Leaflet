@@ -64,4 +64,3 @@ mapa = leaflet() |>
 
 mapa
 
-interes$derrotero
