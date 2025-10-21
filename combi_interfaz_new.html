@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tarjeta de Ruta</title>
+<style>
+  :root{
+    --bg:#d9e0eb;
+    --border:#003399;
+    --accent:#003399; /* azul oscuro */
+    --label-bg:#000;
+    --text:#002266;
+    --card-radius:8px;
+    --card-padding:14px;
+    --max-width:920px;
+  }
+
+  /* Reset sencillo */
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: "Arial", Helvetica, sans-serif;
+    background:#f5f5f7;
+    color:var(--text);
+    padding:20px;
+  }
+
+  .tarjeta_general{
+    width:90vw;
+    max-width:var(--max-width);
+    background:var(--bg);
+    border:3px solid var(--border);
+    border-radius:var(--card-radius);
+    padding:var(--card-padding);
+    box-shadow:0 6px 14px rgba(0,0,0,0.12);
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  /* Contenedor superior: imagen + info */
+  .tarjeta_arriba{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+  }
+
+  /* izquierda: imagen */
+  .tarjeta_arriba_izquierda{
+    flex:0 0 60%;
+    min-height:120px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .tarjeta_arriba_izquierda img{
+    width:100%;
+    height:100%;
+    max-height:220px;
+    object-fit:contain; /* mantiene proporción */
+  }
+
+  /* derecha: info de ruta */
+  .tarjeta_arriba_derecha{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding:6px 4px;
+  }
+
+  .ruta_titulo{
+    display:inline-block;
+    background:var(--label-bg);
+    color:white;
+    padding:6px 10px;
+    border-radius:4px;
+    font-weight:600;
+    letter-spacing:0.6px;
+    width:max-content;
+  }
+
+  .ruta_numero{
+    font-size:34px;
+    font-weight:800;
+    margin-top:4px;
+    letter-spacing:0.6px;
+  }
+
+  .descripcion_titulo{
+    display:inline-block;
+    background:var(--accent);
+    color:white;
+    padding:6px 10px;
+    border-radius:4px;
+    font-weight:700;
+    margin-top:8px;
+    width:max-content;
+  }
+
+  /* parte inferior: descripción larga */
+  .tarjeta_abajo{
+    display:block;
+    padding:10px 6px;
+    border-top:1px solid rgba(0,0,0,0.06);
+  }
+
+  .descripcion_texto{
+    font-weight:700;
+    line-height:1.35;
+    text-transform:uppercase;
+    color:var(--text);
+    letter-spacing:0.6px;
+  }
+
+  /* adaptaciones responsivas */
+  @media (max-width:720px){
+    .tarjeta_arriba{
+      flex-direction:column;
+      align-items:center;
+    }
+    .tarjeta_arriba_izquierda{ width:100%; flex:0 0 auto }
+    .tarjeta_arriba_derecha{ width:100%; text-align:center }
+    .ruta_numero{ font-size:28px }
+    .tarjeta_abajo{ font-size:14px }
+  }
+</style>
+</head>
+<body>
+
+<div class="tarjeta_general" id="tarjetaRuta">
+  <div class="tarjeta_arriba">
+    <div class="tarjeta_arriba_izquierda" style="width:60%;">
+      <!-- Cambia aquí la imagen -->
+      <img id="imgCombi" src="Img/Combis/38PCHC.png" alt="Combi - Ruta">
+    </div>
+
+    <div class="tarjeta_arriba_derecha" style="width:40%;">
+      <!-- Cambia el texto de la ruta -->
+      <div class="ruta_titulo">RUTA</div>
+      <div id="rutaNumero" class="ruta_numero">38 PCH C</div>
+
+      <!-- Título de descripción -->
+      <div class="descripcion_titulo">DESCRIPCIÓN</div>
+    </div>
+  </div>
+
+  <div class="tarjeta_abajo">
+    <!-- Cambia aquí la descripción larga -->
+    <div id="descripcionLarga" class="descripcion_texto">
+      PUNTA AZUL - PIRACANTOS SANTA JULIA PLUTARCO E. CALLES COL. DOCTORES CÉSPEDES UAEH
+    </div>
+  </div>
+</div>
+
+<!-- Pequeño helper JS para cambiar contenido sin tocar HTML -->
+<script>
+  /**
+   * Actualiza la tarjeta con nuevos valores.
+   * imageSrc: ruta de imagen (string)
+   * routeText: texto de la ruta (string)
+   * shortDesc: línea corta si quieres (aquí no usada)
+   * longDesc: descripción grande (string)
+   */
+  function updateCard({ imageSrc, routeText, longDesc }) {
+    if (imageSrc) {
+      document.getElementById('imgCombi').src = imageSrc;
+    }
+    if (routeText) {
+      document.getElementById('rutaNumero').textContent = routeText;
+    }
+    if (longDesc) {
+      document.getElementById('descripcionLarga').textContent = longDesc;
+    }
+  }
+
+  // Ejemplo de uso:
+  // updateCard({
+  //   imageSrc: 'Img/Combis/08PCHC.png',
+  //   routeText: '08 PCH C',
+  //   longDesc: 'PUNTA AZUL - OTRO SITIO - Y VICEVERSA'
+  // });
+</script>
+</body>
+</html>
